@@ -13,9 +13,11 @@ def error_search(log_file):
     error = input("What is the error? ")
     returned_errors = []
 
+    error_patterns = error.lower().split()
+
     with open(log_file, "r", encoding="UTF-8") as file:
         for line in file:
-            if "error" in line.lower() and error.lower() in line.lower():
+            if all(pattern in line.lower() for pattern in error_patterns):
                 returned_errors.append(line)
 
     return returned_errors
